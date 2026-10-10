@@ -41,3 +41,6 @@ def main():
     s18_keywords_filter()
     s19_keywords_clusters()
     s20_keywords_network()
+    
+if __name__ == "__main__":
+    main()
