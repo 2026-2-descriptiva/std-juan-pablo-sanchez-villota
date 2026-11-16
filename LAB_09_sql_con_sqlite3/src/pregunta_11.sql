@@ -22,3 +22,6 @@
 --
 --  Escriba su consulta debajo de esta línea.
 --
+SELECT COUNT(*)
+FROM tbl1
+WHERE c14 LIKE '2018%';
