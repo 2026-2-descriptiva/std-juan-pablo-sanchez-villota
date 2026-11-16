@@ -22,6 +22,9 @@
 --
 --  Escriba su consulta debajo de esta línea.
 --
-SELECT COUNT(*)
+SELECT
+    STRFTIME('%Y', c14) AS YEAR,
+    COUNT(*) AS CANT
 FROM tbl1
-WHERE c14 LIKE '2018%';
+WHERE c14 LIKE '2018%'
+GROUP BY STRFTIME('%Y', c14);
