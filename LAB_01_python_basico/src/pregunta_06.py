@@ -1,3 +1,11 @@
+import gzip
+import os
+
+ruta_archivo = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), "..", "data", "data.csv.gz"
+)
+
+
 def pregunta_06():
     """
     La quinta columna (`metrics`) contiene pares `clave:valor` separados por
@@ -12,5 +20,19 @@ def pregunta_06():
 
         [("aaa", 1, 9), ("bbb", 1, 9), ...]
     """
+    valores = {}
 
-    raise NotImplementedError
+    with gzip.open(ruta_archivo, "rt") as archivo:
+        for linea in archivo:
+            columnas = linea.strip().split("\t")
+            if len(columnas) > 4:
+                # La quinta columna luce así: "aaa:1,bbb:2,ccc:3"
+                for par in columnas[4].split(","):
+                    clave, valor = par.split(":")
+                    valores.setdefault(clave, []).append(int(valor))
+
+    return [(clave, min(lista), max(lista)) for clave, lista in sorted(valores.items())]
+
+
+if __name__ == "__main__":
+    print(pregunta_06())
